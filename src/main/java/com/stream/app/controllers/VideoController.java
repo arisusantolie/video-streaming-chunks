@@ -156,13 +156,12 @@ public class VideoController {
             System.out.println("read(number of bytes) : " + read);
 
             HttpHeaders headers = new HttpHeaders();
-            headers.add("Content-Range", "bytes " + rangeStart + "-" + rangeEnd + "/" + fileLength);
+            headers.add("Content-Range", "bytes " + rangeStart + "-" + rangeEnd + "/" + (fileLength+1));
             headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
             headers.add("Accept-Ranges", "bytes");
             headers.add("Pragma", "no-cache");
             headers.add("Expires", "0");
             headers.add("X-Content-Type-Options", "nosniff");
-            headers.add("Access-Control-Allow-Origin","*");
             headers.setContentLength(contentLength);
 
             return ResponseEntity
