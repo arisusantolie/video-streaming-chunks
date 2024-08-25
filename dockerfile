@@ -17,8 +17,8 @@ WORKDIR /
 COPY --from=mvnbuild /opt/application/target/*.jar streaming-be-test-0.0.1-SNAPSHOT.jar
 RUN mkdir logs
 # tzdata for timzone
-RUN apt-get update -y
-RUN apt-get install -y tzdata
+# RUN apt-get update -y
+# RUN apt-get install -y tzdata
 
 # timezone env with default
 ENV TZ Asia/Jakarta
