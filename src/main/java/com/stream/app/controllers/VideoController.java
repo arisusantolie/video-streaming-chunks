@@ -123,7 +123,8 @@ public class VideoController {
         String[] ranges = range.replace("bytes=", "").split("-");
         rangeStart = Long.parseLong(ranges[0]);
 
-        rangeEnd = rangeStart + AppConstants.CHUNK_SIZE - 1;
+//        rangeEnd = rangeStart + AppConstants.CHUNK_SIZE - 1;
+        rangeEnd=Long.parseLong(ranges[1]);
 
         if (rangeEnd >= fileLength) {
             rangeEnd = fileLength - 1;
@@ -159,7 +160,6 @@ public class VideoController {
             headers.add("Accept-Ranges", "bytes");
             headers.add("Content-Range", "bytes " + rangeStart + "-" + rangeEnd + "/" + fileLength);
             headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
-            headers.add("Content-Length", ""+(rangeEnd-rangeStart+1));
             headers.add("Pragma", "no-cache");
             headers.add("Expires", "0");
             headers.add("X-Content-Type-Options", "nosniff");
