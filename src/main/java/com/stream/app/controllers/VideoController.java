@@ -126,6 +126,10 @@ public class VideoController {
         if(ranges.length > 1) {
             rangeEnd=Long.parseLong(ranges[1]);
             //for safari
+            if(rangeEnd>1){
+                rangeEnd = rangeStart + AppConstants.CHUNK_SIZE - 1;
+            }
+
         }else{
             rangeEnd = rangeStart + AppConstants.CHUNK_SIZE - 1;
             //for chrome,edge,etc
