@@ -158,6 +158,7 @@ public class VideoController {
             HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Range", "bytes " + rangeStart + "-" + rangeEnd + "/" + fileLength);
             headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
+            headers.add("Accept-Ranges", "bytes");
             headers.add("Pragma", "no-cache");
             headers.add("Expires", "0");
             headers.add("X-Content-Type-Options", "nosniff");
