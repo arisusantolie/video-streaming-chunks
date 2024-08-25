@@ -161,7 +161,7 @@ public class VideoController {
             headers.add("Accept-Ranges", "bytes");
             headers.add("Pragma", "no-cache");
             headers.add("Expires", "0");
-            headers.add("X-Content-Type-Options", "nosniff");
+//            headers.add("X-Content-Type-Options", "nosniff");
             headers.setContentLength(contentLength);
 
             return ResponseEntity
