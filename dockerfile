@@ -11,7 +11,7 @@ COPY src ./src
 # menjalankan compile source code dan buat jar file
 RUN mvn clean install package -DskipTests
 
-FROM adoptopenjdk/openjdk21
+FROM openjdk:21-jdk
 # Create the / directory in the final image
 WORKDIR /
 COPY --from=mvnbuild /opt/application/target/*.jar streaming-be-test-0.0.1-SNAPSHOT.jar
