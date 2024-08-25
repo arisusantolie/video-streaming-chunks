@@ -19,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.RandomAccessFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -151,12 +150,16 @@ public class VideoController {
         System.out.println("range end : " + rangeEnd);
         InputStream inputStream;
 
-        try (RandomAccessFile file = new RandomAccessFile(path.toFile(), "r")) {
-            file.seek(rangeStart);
+        try {
+
+            inputStream = Files.newInputStream(path);
+            inputStream.skip(rangeStart);
             long contentLength = rangeEnd - rangeStart + 1;
 
+
             byte[] data = new byte[(int) contentLength];
-            file.readFully(data);
+            int read = inputStream.read(data, 0, data.length);
+            System.out.println("read(number of bytes) : " + read);
 
             HttpHeaders headers = new HttpHeaders();
             headers.add("Accept-Ranges", "bytes");
@@ -167,10 +170,12 @@ public class VideoController {
             headers.add("X-Content-Type-Options", "nosniff");
             headers.setContentLength(contentLength);
 
-            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT)
+            return ResponseEntity
+                    .status(HttpStatus.PARTIAL_CONTENT)
                     .headers(headers)
                     .contentType(MediaType.parseMediaType(contentType))
                     .body(new ByteArrayResource(data));
+
 
         } catch (IOException ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
