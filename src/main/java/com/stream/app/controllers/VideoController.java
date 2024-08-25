@@ -123,8 +123,13 @@ public class VideoController {
         String[] ranges = range.replace("bytes=", "").split("-");
         rangeStart = Long.parseLong(ranges[0]);
 
-//        rangeEnd = rangeStart + AppConstants.CHUNK_SIZE - 1;
-        rangeEnd=Long.parseLong(ranges[1]);
+        if(ranges.length > 1) {
+            rangeEnd=Long.parseLong(ranges[1]);
+            //for safari
+        }else{
+            rangeEnd = rangeStart + AppConstants.CHUNK_SIZE - 1;
+            //for chrome,edge,etc
+        }
 
         if (rangeEnd >= fileLength) {
             rangeEnd = fileLength - 1;
