@@ -29,20 +29,20 @@ function App() {
           <div className="w-full">
             <h1 className="text-white text-center mt-2">Playing Video</h1>
 
-            {/* <video
+            <video
               style={{
                 width: "100%",
               }}
-              // src={`http://localhost:8080/api/v1/videos/stream/range/${videoId}`}
-              src="http://localhost:8080/api/v1/videos/f6e21144-c462-459b-af96-1cde95621710/master.m3u8"
+              src={`http://localhost:8080/api/v1/videos/stream/range/${videoId}`}
+              // src="http://localhost:8080/api/v1/videos/f6e21144-c462-459b-af96-1cde95621710/master.m3u8"
               controls
-            ></video> */}
+            ></video>
 
-            <div>
+            {/* <div>
               <VideoPlayer
                 src={`http://localhost:8080/api/v1/videos/${videoId}/master.m3u8`}
               ></VideoPlayer>
-            </div>
+            </div> */}
 
             {/* <video
               id="my-video"
